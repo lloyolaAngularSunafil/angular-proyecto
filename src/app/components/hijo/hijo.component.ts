@@ -1,4 +1,11 @@
-import { Component,OnInit,Input,Output,EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-hijo',
@@ -8,11 +15,14 @@ import { Component,OnInit,Input,Output,EventEmitter } from '@angular/core';
 export class HijoComponent implements OnInit  {
   @Input() nombreHijo: string = 'Sin Nombre';
   @Output() cambioNombreHijo= new EventEmitter<string>();
-  constructor() {}
+
+  constructor(private dataService:DataService) {}
+
   ngOnInit() {}
 
   cambiarNombre(){
     this.nombreHijo = 'Juan Karlost';
     this.cambioNombreHijo.emit(this.nombreHijo);
+    this.dataService.nombreUsuario = this.nombreHijo;
   }
 }
